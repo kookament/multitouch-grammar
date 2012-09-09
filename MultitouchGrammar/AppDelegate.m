@@ -1,12 +1,5 @@
-//
-//  AppDelegate.m
-//  MultitouchGrammar
-//
-//  Created by Sean Kelley on 9/9/12.
-//  Copyright (c) 2012 Sean Kelley. All rights reserved.
-//
-
 #import "AppDelegate.h"
+#import "PrintingListener.h"
 
 @implementation AppDelegate
 
@@ -17,7 +10,7 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
-    // Insert code here to initialize your application
+    PrintingListener *p = [[PrintingListener alloc] init];
 }
 
 @end
