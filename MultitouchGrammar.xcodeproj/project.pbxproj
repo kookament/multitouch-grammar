@@ -1,0 +1,298 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		78088B6C15FD569A0074C90A /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 78088B6B15FD569A0074C90A /* Cocoa.framework */; };
+		78088B7615FD569A0074C90A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 78088B7415FD569A0074C90A /* InfoPlist.strings */; };
+		78088B7815FD569A0074C90A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 78088B7715FD569A0074C90A /* main.m */; };
+		78088B7C15FD569A0074C90A /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 78088B7A15FD569A0074C90A /* Credits.rtf */; };
+		78088B7F15FD569A0074C90A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 78088B7E15FD569A0074C90A /* AppDelegate.m */; };
+		78088B8215FD569A0074C90A /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 78088B8015FD569A0074C90A /* MainMenu.xib */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		78088B6715FD569A0074C90A /* MultitouchGrammar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MultitouchGrammar.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		78088B6B15FD569A0074C90A /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		78088B6E15FD569A0074C90A /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		78088B6F15FD569A0074C90A /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		78088B7015FD569A0074C90A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		78088B7315FD569A0074C90A /* MultitouchGrammar-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MultitouchGrammar-Info.plist"; sourceTree = "<group>"; };
+		78088B7515FD569A0074C90A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		78088B7715FD569A0074C90A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		78088B7915FD569A0074C90A /* MultitouchGrammar-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MultitouchGrammar-Prefix.pch"; sourceTree = "<group>"; };
+		78088B7B15FD569A0074C90A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
+		78088B7D15FD569A0074C90A /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		78088B7E15FD569A0074C90A /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		78088B8115FD569A0074C90A /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		78088B6415FD569A0074C90A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				78088B6C15FD569A0074C90A /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		78088B5C15FD569A0074C90A = {
+			isa = PBXGroup;
+			children = (
+				78088B7115FD569A0074C90A /* MultitouchGrammar */,
+				78088B6A15FD569A0074C90A /* Frameworks */,
+				78088B6815FD569A0074C90A /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		78088B6815FD569A0074C90A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				78088B6715FD569A0074C90A /* MultitouchGrammar.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		78088B6A15FD569A0074C90A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				78088B6B15FD569A0074C90A /* Cocoa.framework */,
+				78088B6D15FD569A0074C90A /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		78088B6D15FD569A0074C90A /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				78088B6E15FD569A0074C90A /* AppKit.framework */,
+				78088B6F15FD569A0074C90A /* CoreData.framework */,
+				78088B7015FD569A0074C90A /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		78088B7115FD569A0074C90A /* MultitouchGrammar */ = {
+			isa = PBXGroup;
+			children = (
+				78088B7D15FD569A0074C90A /* AppDelegate.h */,
+				78088B7E15FD569A0074C90A /* AppDelegate.m */,
+				78088B8015FD569A0074C90A /* MainMenu.xib */,
+				78088B7215FD569A0074C90A /* Supporting Files */,
+			);
+			path = MultitouchGrammar;
+			sourceTree = "<group>";
+		};
+		78088B7215FD569A0074C90A /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				78088B7315FD569A0074C90A /* MultitouchGrammar-Info.plist */,
+				78088B7415FD569A0074C90A /* InfoPlist.strings */,
+				78088B7715FD569A0074C90A /* main.m */,
+				78088B7915FD569A0074C90A /* MultitouchGrammar-Prefix.pch */,
+				78088B7A15FD569A0074C90A /* Credits.rtf */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		78088B6615FD569A0074C90A /* MultitouchGrammar */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 78088B8515FD569A0074C90A /* Build configuration list for PBXNativeTarget "MultitouchGrammar" */;
+			buildPhases = (
+				78088B6315FD569A0074C90A /* Sources */,
+				78088B6415FD569A0074C90A /* Frameworks */,
+				78088B6515FD569A0074C90A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MultitouchGrammar;
+			productName = MultitouchGrammar;
+			productReference = 78088B6715FD569A0074C90A /* MultitouchGrammar.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		78088B5E15FD569A0074C90A /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0440;
+				ORGANIZATIONNAME = "Sean Kelley";
+			};
+			buildConfigurationList = 78088B6115FD569A0074C90A /* Build configuration list for PBXProject "MultitouchGrammar" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 78088B5C15FD569A0074C90A;
+			productRefGroup = 78088B6815FD569A0074C90A /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				78088B6615FD569A0074C90A /* MultitouchGrammar */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		78088B6515FD569A0074C90A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				78088B7615FD569A0074C90A /* InfoPlist.strings in Resources */,
+				78088B7C15FD569A0074C90A /* Credits.rtf in Resources */,
+				78088B8215FD569A0074C90A /* MainMenu.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		78088B6315FD569A0074C90A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				78088B7815FD569A0074C90A /* main.m in Sources */,
+				78088B7F15FD569A0074C90A /* AppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		78088B7415FD569A0074C90A /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				78088B7515FD569A0074C90A /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		78088B7A15FD569A0074C90A /* Credits.rtf */ = {
+			isa = PBXVariantGroup;
+			children = (
+				78088B7B15FD569A0074C90A /* en */,
+			);
+			name = Credits.rtf;
+			sourceTree = "<group>";
+		};
+		78088B8015FD569A0074C90A /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				78088B8115FD569A0074C90A /* en */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		78088B8315FD569A0074C90A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		78088B8415FD569A0074C90A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		78088B8615FD569A0074C90A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "MultitouchGrammar/MultitouchGrammar-Prefix.pch";
+				INFOPLIST_FILE = "MultitouchGrammar/MultitouchGrammar-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		78088B8715FD569A0074C90A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "MultitouchGrammar/MultitouchGrammar-Prefix.pch";
+				INFOPLIST_FILE = "MultitouchGrammar/MultitouchGrammar-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		78088B6115FD569A0074C90A /* Build configuration list for PBXProject "MultitouchGrammar" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				78088B8315FD569A0074C90A /* Debug */,
+				78088B8415FD569A0074C90A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		78088B8515FD569A0074C90A /* Build configuration list for PBXNativeTarget "MultitouchGrammar" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				78088B8615FD569A0074C90A /* Debug */,
+				78088B8715FD569A0074C90A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 78088B5E15FD569A0074C90A /* Project object */;
+}
