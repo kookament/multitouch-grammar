@@ -1,5 +1,6 @@
 #import "AppDelegate.h"
 #import "PrintingListener.h"
+#import "GrammarListener.h"
 
 @implementation AppDelegate
 
@@ -11,6 +12,7 @@
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
     PrintingListener *p = [[PrintingListener alloc] init];
+    GrammarListener *g = [[GrammarListener alloc] init];
 }
 
 @end

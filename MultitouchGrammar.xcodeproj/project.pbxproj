@@ -111,9 +111,9 @@
 				78088B9215FD5AFA0074C90A /* MultitouchListener.m */,
 				78088B7D15FD569A0074C90A /* AppDelegate.h */,
 				78088B7E15FD569A0074C90A /* AppDelegate.m */,
+				78088B8815FD56CC0074C90A /* Touch.h */,
 				78088B8015FD569A0074C90A /* MainMenu.xib */,
 				78088B7215FD569A0074C90A /* Supporting Files */,
-				78088B8815FD56CC0074C90A /* Touch.h */,
 			);
 			path = MultitouchGrammar;
 			sourceTree = "<group>";
