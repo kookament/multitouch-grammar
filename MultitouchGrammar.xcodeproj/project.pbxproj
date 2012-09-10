@@ -16,6 +16,8 @@
 		78088B9315FD5AFA0074C90A /* MultitouchListener.m in Sources */ = {isa = PBXBuildFile; fileRef = 78088B9215FD5AFA0074C90A /* MultitouchListener.m */; };
 		78088B9615FD5D8C0074C90A /* PrintingListener.m in Sources */ = {isa = PBXBuildFile; fileRef = 78088B9515FD5D8C0074C90A /* PrintingListener.m */; };
 		78088B9815FD5F070074C90A /* MultitouchSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 78088B9715FD5F070074C90A /* MultitouchSupport.framework */; };
+		78088B9B15FD61930074C90A /* GrammarListener.m in Sources */ = {isa = PBXBuildFile; fileRef = 78088B9A15FD61930074C90A /* GrammarListener.m */; };
+		78088BA015FD63310074C90A /* GesturePoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 78088B9F15FD63300074C90A /* GesturePoint.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +40,12 @@
 		78088B9415FD5D8C0074C90A /* PrintingListener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrintingListener.h; sourceTree = "<group>"; };
 		78088B9515FD5D8C0074C90A /* PrintingListener.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrintingListener.m; sourceTree = "<group>"; };
 		78088B9715FD5F070074C90A /* MultitouchSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MultitouchSupport.framework; path = ../../../../../../System/Library/PrivateFrameworks/MultitouchSupport.framework; sourceTree = "<group>"; };
+		78088B9915FD61930074C90A /* GrammarListener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GrammarListener.h; sourceTree = "<group>"; };
+		78088B9A15FD61930074C90A /* GrammarListener.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GrammarListener.m; sourceTree = "<group>"; };
+		78088B9C15FD63190074C90A /* Enum.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Enum.h; sourceTree = "<group>"; };
+		78088B9D15FD63190074C90A /* Enum.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Enum.m; sourceTree = "<group>"; };
+		78088B9E15FD63300074C90A /* GesturePoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GesturePoint.h; sourceTree = "<group>"; };
+		78088B9F15FD63300074C90A /* GesturePoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GesturePoint.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,6 +103,10 @@
 			children = (
 				78088B9415FD5D8C0074C90A /* PrintingListener.h */,
 				78088B9515FD5D8C0074C90A /* PrintingListener.m */,
+				78088B9E15FD63300074C90A /* GesturePoint.h */,
+				78088B9F15FD63300074C90A /* GesturePoint.m */,
+				78088B9915FD61930074C90A /* GrammarListener.h */,
+				78088B9A15FD61930074C90A /* GrammarListener.m */,
 				78088B9115FD5AFA0074C90A /* MultitouchListener.h */,
 				78088B9215FD5AFA0074C90A /* MultitouchListener.m */,
 				78088B7D15FD569A0074C90A /* AppDelegate.h */,
@@ -109,6 +121,8 @@
 		78088B7215FD569A0074C90A /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				78088B9C15FD63190074C90A /* Enum.h */,
+				78088B9D15FD63190074C90A /* Enum.m */,
 				78088B7315FD569A0074C90A /* MultitouchGrammar-Info.plist */,
 				78088B7415FD569A0074C90A /* InfoPlist.strings */,
 				78088B7715FD569A0074C90A /* main.m */,
@@ -186,6 +200,8 @@
 				78088B7F15FD569A0074C90A /* AppDelegate.m in Sources */,
 				78088B9315FD5AFA0074C90A /* MultitouchListener.m in Sources */,
 				78088B9615FD5D8C0074C90A /* PrintingListener.m in Sources */,
+				78088B9B15FD61930074C90A /* GrammarListener.m in Sources */,
+				78088BA015FD63310074C90A /* GesturePoint.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
