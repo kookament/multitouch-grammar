@@ -4,7 +4,7 @@ static NSMutableArray *registeredListeners = nil;
 
 static int touchCallback(int device, Touch *data, int nFingers, double timestamp, int frame) {
     for (int i = 0; i < [registeredListeners count]; ++i) {
-        [((MultitouchListener*) [registeredListeners objectAtIndex:i]) handleTouches:data numTouches:nFingers atTime:timestamp];
+        [((MultitouchListener*) [registeredListeners objectAtIndex:i]) handleTouches:data numTouches:nFingers atTime:timestamp frame:frame];
     }
     return 0;
 }
@@ -12,10 +12,12 @@ static int touchCallback(int device, Touch *data, int nFingers, double timestamp
 @implementation MultitouchListener
 
 + (void) initialize {
-    registeredListeners = [[NSMutableArray alloc] init];
-    MTDeviceRef trackpad = MTDeviceCreateDefault();
-    MTRegisterContactFrameCallback(trackpad, touchCallback);
-    MTDeviceStart(trackpad, 0);
+    if (self == [MultitouchListener class]) {
+        registeredListeners = [[NSMutableArray alloc] init];
+        MTDeviceRef trackpad = MTDeviceCreateDefault();
+        MTRegisterContactFrameCallback(trackpad, touchCallback);
+        MTDeviceStart(trackpad, 0);
+    }
 }
 
 - (void) registerSelf {
@@ -35,7 +37,7 @@ static int touchCallback(int device, Touch *data, int nFingers, double timestamp
     return self;
 }
 
-- (void) handleTouches:(Touch *)data numTouches:(int)n atTime:(double)timestamp {
+- (void) handleTouches:(Touch *)data numTouches:(int)n atTime:(double)timestamp frame:(int)f {
     [NSException raise:@"Must subclass MultitouchListener" format:@"MultitouchListener is abstract and must be subclassed."];
 }
 

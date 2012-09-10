@@ -31,7 +31,7 @@ typedef enum diff_dir_t {
     lastPointsLength = 0;
 }
 
-- (void) handleTouches:(Touch *)data numTouches:(int)n atTime:(double)timestamp {
+- (void) handleTouches:(Touch *)data numTouches:(int)n atTime:(double)timestamp frame:(int)f {
     if (n < 2 || ((timestamp - lastTimestamp < MIN_INTERVAL) &&
                   (lastPoints == nil || lastPointsLength == n))) {
         return;
@@ -89,6 +89,8 @@ typedef enum diff_dir_t {
 - (diff_dir) directionFrom:(Touch*)t1 to:(Touch*)t2 {
     float xdiff = t2->normalized.position.x - t1->normalized.position.x;
     float ydiff = t2->normalized.position.y - t1->normalized.position.y;
+    
+    NSLog(@"%f, %f", t1->normalized.position.x, t1->normalized.position.y);
     
     diff_dir dir = NONE;
     

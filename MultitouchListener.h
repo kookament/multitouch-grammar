@@ -3,6 +3,6 @@
 
 @interface MultitouchListener : NSObject
 
-- (void) handleTouches:(Touch*)data numTouches:(int)n atTime:(double)timestamp;
+- (void) handleTouches:(Touch*)data numTouches:(int)n atTime:(double)timestamp frame:(int)f;
 
 @end
