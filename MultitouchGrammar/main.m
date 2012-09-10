@@ -14,5 +14,6 @@
 int main(int argc, char *argv[]) {
 //    PrintingListener *p = [[PrintingListener alloc] init];
     GrammarListener *g = [[GrammarListener alloc] init];
-    return NSApplicationMain(argc, (const char **)argv);
+    sleep(-1);
+    return 0;
 }

@@ -92,13 +92,13 @@ typedef enum diff_dir_t {
     
     diff_dir dir = NONE;
     
-    if (xdiff <= -MIN_DISTANCE)
+    if (xdiff < -MIN_DISTANCE)
         dir |= LEFT;
-    if (xdiff >= MIN_DISTANCE)
+    else if (xdiff > MIN_DISTANCE)
         dir |= RIGHT;
-    if (ydiff <= -MIN_DISTANCE)
+    if (ydiff < -MIN_DISTANCE)
         dir |= DOWN;
-    if (ydiff >= MIN_DISTANCE)
+    else if (ydiff > MIN_DISTANCE)
         dir |= UP;
     
     return dir;
