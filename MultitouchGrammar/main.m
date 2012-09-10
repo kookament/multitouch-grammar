@@ -8,7 +8,11 @@
 
 #import <Cocoa/Cocoa.h>
 #import "Touch.h"
+#import "PrintingListener.h"
+#import "GrammarListener.h"
 
 int main(int argc, char *argv[]) {
+//    PrintingListener *p = [[PrintingListener alloc] init];
+    GrammarListener *g = [[GrammarListener alloc] init];
     return NSApplicationMain(argc, (const char **)argv);
 }

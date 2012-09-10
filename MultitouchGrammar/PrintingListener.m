@@ -1,7 +1,7 @@
 #import "PrintingListener.h"
 
 const int FINGER_THRESHOLD = 1;
-const double MIN_INTERVAL = 0.25;
+const double MIN_PRINT_INTERVAL = 0.25;
 const BOOL PRINT_A_LOT = NO;
 
 
@@ -18,7 +18,7 @@ const BOOL PRINT_A_LOT = NO;
 @synthesize lastTimestamp;
 
 - (void) handleTouches:(Touch *)data numTouches:(int)n atTime:(double)timestamp {
-    if (timestamp - self.lastTimestamp < MIN_INTERVAL)
+    if (timestamp - self.lastTimestamp < MIN_PRINT_INTERVAL)
         return;
     self.lastTimestamp = timestamp;
     

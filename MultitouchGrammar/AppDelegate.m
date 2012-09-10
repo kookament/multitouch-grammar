@@ -11,8 +11,7 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
-    PrintingListener *p = [[PrintingListener alloc] init];
-    GrammarListener *g = [[GrammarListener alloc] init];
+    
 }
 
 @end

@@ -18,6 +18,7 @@
 		78088B9815FD5F070074C90A /* MultitouchSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 78088B9715FD5F070074C90A /* MultitouchSupport.framework */; };
 		78088B9B15FD61930074C90A /* GrammarListener.m in Sources */ = {isa = PBXBuildFile; fileRef = 78088B9A15FD61930074C90A /* GrammarListener.m */; };
 		78088BA015FD63310074C90A /* GesturePoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 78088B9F15FD63300074C90A /* GesturePoint.m */; };
+		78088BA915FD6E8F0074C90A /* Enum.m in Sources */ = {isa = PBXBuildFile; fileRef = 78088B9D15FD63190074C90A /* Enum.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -196,6 +197,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				78088BA915FD6E8F0074C90A /* Enum.m in Sources */,
 				78088B7815FD569A0074C90A /* main.m in Sources */,
 				78088B7F15FD569A0074C90A /* AppDelegate.m in Sources */,
 				78088B9315FD5AFA0074C90A /* MultitouchListener.m in Sources */,
@@ -241,6 +243,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_WARN_OBJCPP_ARC_ABI = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -268,6 +271,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_WARN_OBJCPP_ARC_ABI = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -333,6 +337,7 @@
 				78088B8715FD569A0074C90A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
