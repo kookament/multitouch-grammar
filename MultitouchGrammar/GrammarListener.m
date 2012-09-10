@@ -31,7 +31,7 @@ typedef enum diff_dir_t {
     lastPointsLength = 0;
 }
 
-- (void) handleTouches:(Touch *)data numTouches:(int)n atTime:(double)timestamp frame:(int)f {
+- (void) handleTouches:(Touch *)data numTouches:(int)n atTime:(double)timestame {
     if (n < 2 || ((timestamp - lastTimestamp < MIN_INTERVAL) &&
                   (lastPoints == nil || lastPointsLength == n))) {
         return;

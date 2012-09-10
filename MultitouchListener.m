@@ -4,7 +4,7 @@ static NSMutableArray *registeredListeners = nil;
 
 static int touchCallback(int device, Touch *data, int nFingers, double timestamp, int frame) {
     for (int i = 0; i < [registeredListeners count]; ++i) {
-        [((MultitouchListener*) [registeredListeners objectAtIndex:i]) handleTouches:data numTouches:nFingers atTime:timestamp frame:frame];
+        [((MultitouchListener*) [registeredListeners objectAtIndex:i]) handleTouches:data numTouches:nFingers atTime:timestamp];
     }
     return 0;
 }
@@ -37,7 +37,7 @@ static int touchCallback(int device, Touch *data, int nFingers, double timestamp
     return self;
 }
 
-- (void) handleTouches:(Touch *)data numTouches:(int)n atTime:(double)timestamp frame:(int)f {
+- (void) handleTouches:(Touch *)data numTouches:(int)n atTime:(double)timestamp {
     [NSException raise:@"Must subclass MultitouchListener" format:@"MultitouchListener is abstract and must be subclassed."];
 }
 
