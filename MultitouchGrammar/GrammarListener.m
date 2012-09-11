@@ -1,12 +1,12 @@
 #import "GrammarListener.h"
 
-const double MIN_INTERVAL = 0.25;
+const double MIN_INTERVAL = 0.05;
 const double MIN_DISTANCE = 0.1;
 // How long between callbacks is considered a new gesture (without futher computation).
 const double NEW_GESTURE_START_TIME = 1.0;
 // Arbitrary cutoff for gesture length. Events older than this are thrown out.
 // Circular buffer would be nice and fast for this.
-const int MAX_GESTURE_LENGTH = 10;
+const int MAX_GESTURE_LENGTH = 15;
 
 typedef enum diff_dir_t {
     NONE = 0,
@@ -20,11 +20,11 @@ typedef enum diff_dir_t {
 
 - (GrammarListener*) init {
     self = [super init];
-    [self clear];
+    [self resetGesture];
     return self;
 }
 
-- (void) clear {
+- (void) resetGesture {
     lastTimestamp = 0;
     gesturePoints = [[NSMutableArray alloc] init];
     if (lastPoints != nil) {
@@ -36,13 +36,13 @@ typedef enum diff_dir_t {
 
 - (void) handleTouches:(Touch *)data numTouches:(int)n atTime:(double)timestamp {
     if (n < 2) {
-        [self clear];
+        [self resetGesture];
         return;
+    } else if (timestamp - lastTimestamp > NEW_GESTURE_START_TIME) {
+        [self resetGesture];
     } else if ((timestamp - lastTimestamp < MIN_INTERVAL) &&
                (lastPoints == nil || lastPointsLength == n)) {
         return;
-    } else if (timestamp - lastTimestamp > NEW_GESTURE_START_TIME) {
-        [self clear];
     }
     
     NSMutableDictionary *fingers = [[NSMutableDictionary alloc] init];
@@ -67,6 +67,8 @@ typedef enum diff_dir_t {
         }
         if (!stationary) {
             [gesturePoints addObject:fingers];
+        } else {
+            return;
         }
     }
     
