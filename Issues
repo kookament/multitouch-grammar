@@ -1,0 +1,40 @@
+Errors in Enum class -- why are the instances themselves being autoreleased at all?
+objc[2057]: Object 0x103001970 of class __NSCFString autoreleased with no pool in place - just leaking - break on objc_autoreleaseNoPool() to debug
+objc[2057]: Object 0x103001880 of class Direction autoreleased with no pool in place - just leaking - break on objc_autoreleaseNoPool() to debug
+
+Collapsing swipe movements does not work as expected. A single downswipe:
+    6 = "Direction.NONE";
+    2 = "Direction.NONE";
+
+    6 = "Direction.DOWN";
+    2 = "Direction.NONE";
+
+    6 = "Direction.DOWN";
+    2 = "Direction.DOWN";
+
+    6 = "Direction.DOWN";
+    2 = "Direction.NONE";
+
+    6 = "Direction.DOWN";
+    2 = "Direction.DOWN";
+    
+Expected:
+    6 = NONE
+    2 = NONE
+    
+    6 = DOWN
+    2 = DOWN
+
+Possible causes:
+    movement threshold is too hard -- if one finger is barely below the threshold but another is past it, the entire entry is clobbered,
+        and the "stationary" finger is now has to move even farther (since it's relative to the new position)
+
+Possible solutions:
+    ability to bias a finger's computed direction based on the direction of the previous gesture point for that finger 
+        i.e., if the finger was last registered moving down, lower the threshold for down to make consistency more likely
+    don't save new points for fingers that are registered as being stationary -- if they are instead just below the threshold,
+        next frame they probably will be over the threshold
+    resolve adjacent points together that are really close and similar
+        i.e., if a point immediately follows another point and is similar, they should actually be recorded as a single point 
+            that is their combination
+        problem -- what are measures of closeness (physical/temporal proximity) and similarity (NONEs are wildcards, all others must match?)
