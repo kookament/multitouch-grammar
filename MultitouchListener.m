@@ -42,7 +42,6 @@ static int touchCallback(int device, Touch *data, int nFingers, double timestamp
 }
 
 - (void) dealloc {
-    [super dealloc];
     [self deregisterSelf];
 }
 

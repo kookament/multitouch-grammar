@@ -36,7 +36,6 @@ typedef enum diff_dir_t {
 
 - (void) handleTouches:(Touch *)data numTouches:(int)n atTime:(double)timestamp {
     if (n < 2) {
-        // Let go too much; gesture is reset.
         [self clear];
         return;
     } else if ((timestamp - lastTimestamp < MIN_INTERVAL) &&
@@ -47,60 +46,38 @@ typedef enum diff_dir_t {
     }
     
     NSMutableDictionary *fingers = [[NSMutableDictionary alloc] init];
-    if (lastPoints == nil) {
+    if (lastPoints == nil || n != lastPointsLength) {
         for (int i = 0; i < n; ++i) {
             [fingers setObject:Direction.NONE forKey:[[NSNumber alloc] initWithInt:data[i].identifier]];
         }
         [gesturePoints addObject:fingers];
     } else {
-         if (n < lastPointsLength) {
-            // Finger lifted.
-            for (int i = 0; i < n; ++i) {
-                // Direction.NONE: this is not a movement event.
-                [fingers setObject:Direction.NONE forKey:[[NSNumber alloc] initWithInt:data[i].identifier]];
+        BOOL stationary = YES;
+        for (int i = 0; i < n; ++i) {
+            assert(lastPoints[i].identifier == data[i].identifier);
+            Direction *dir = [self directionFromDiffDirection:[self directionFrom:&lastPoints[i] to:&data[i]]];
+            if (dir == nil) {
+                // WAHT TO DO
+                dir = Direction.NONE;
             }
+            if (dir != Direction.NONE) {
+                stationary = NO;
+            }
+            [fingers setObject:dir forKey:[[NSNumber alloc] initWithInt:data[i].identifier]];
+        }
+        if (!stationary) {
             [gesturePoints addObject:fingers];
-        } else if (n > lastPointsLength) {
-            // Finger put down.
-            for (int i = 0; i < n; ++i) {
-                [fingers setObject:Direction.NONE forKey:[[NSNumber alloc] initWithInt:data[i].identifier]];
-            }
-            [gesturePoints addObject:fingers];
-        } else {
-            BOOL stationary = YES;
-            for (int i = 0; i < n; ++i) {
-                assert(lastPoints[i].identifier == data[i].identifier);
-//                if (lastPoints[i].identifier != data[i].identifier) {
-//                    NSLog(@"caught identifiers in unequal order, skipping datapoint");
-//                    NSMutableString *expected = [[NSMutableString alloc] initWithString:@"expected: "];
-//                    NSMutableString *actual =   [[NSMutableString alloc] initWithString:@"actual:   "];
-//                    for (int j = 0; j < n; ++j) {
-//                        [expected appendFormat:@"%2d ", lastPoints[j].identifier];
-//                        [actual   appendFormat:@"%2d ", data[j].identifier];
-//                    }
-//                    NSLog(@"\n%@\n%@", expected, actual);
-//                    return;
-//                }
-                Direction *dir = [self directionFromDiffDirection:[self directionFrom:&lastPoints[i] to:&data[i]]];
-                if (dir == nil) {
-                    // WAHT TO DO
-                    dir = Direction.NONE;
-                }
-                if (dir != Direction.NONE) {
-                    stationary = NO;
-                }
-                [fingers setObject:dir forKey:[[NSNumber alloc] initWithInt:data[i].identifier]];
-            }
-            if (!stationary) {
-                [gesturePoints addObject:fingers];
-            }
         }
     }
     
+    if ([gesturePoints count] > MAX_GESTURE_LENGTH) {
+        [gesturePoints removeObjectAtIndex:0];
+    }
     
     lastTimestamp = timestamp;
     [self copyLastGesturePointPosition:data numTouches:n];
-    NSLog(@"%@\n", [gesturePoints lastObject]);
+    
+    [self detectGesture];
 }
 
 - (void) copyLastGesturePointPosition:(Touch*)data numTouches:(int)n {
@@ -110,6 +87,11 @@ typedef enum diff_dir_t {
     lastPoints = malloc(sizeof(Touch) * n);
     memcpy(lastPoints, data, sizeof(Touch) * n);
     lastPointsLength = n;
+}
+
+- (void) detectGesture {
+    assert([gesturePoints count] <= MAX_GESTURE_LENGTH);
+    NSLog(@"%ld gesture points", [gesturePoints count]);
 }
 
 - (diff_dir) directionFrom:(Touch*)t1 to:(Touch*)t2 {

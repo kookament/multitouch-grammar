@@ -14,6 +14,11 @@
 int main(int argc, char *argv[]) {
 //    PrintingListener *p = [[PrintingListener alloc] init];
     GrammarListener *g = [[GrammarListener alloc] init];
-    sleep(-1);
+    while (YES) {
+        // Because Xcode is bad and should feel bad. Continuing after
+        // a breakpoint would otherwise terminate the program because
+        // it would continue after sleep().
+        sleep(-1);
+    }
     return 0;
 }
