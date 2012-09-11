@@ -41,7 +41,7 @@ typedef enum diff_dir_t {
     } else if (timestamp - lastTimestamp > NEW_GESTURE_START_TIME) {
         [self resetGesture];
     } else if ((timestamp - lastTimestamp < MIN_INTERVAL) &&
-               (lastPoints == nil || lastPointsLength == n)) {
+               (lastPoints == nil || lastPointsLength == n || [self enoughDistanceFromLast:data numTouches:n])) {
         return;
     }
     
@@ -55,11 +55,7 @@ typedef enum diff_dir_t {
         BOOL stationary = YES;
         for (int i = 0; i < n; ++i) {
             assert(lastPoints[i].identifier == data[i].identifier);
-            Direction *dir = [self directionFromDiffDirection:[self directionFrom:&lastPoints[i] to:&data[i]]];
-            if (dir == nil) {
-                // WAHT TO DO
-                dir = Direction.NONE;
-            }
+            Direction *dir = [self directionFrom:&lastPoints[i] to:&data[i]];
             if (dir != Direction.NONE) {
                 stationary = NO;
             }
@@ -82,6 +78,15 @@ typedef enum diff_dir_t {
     [self detectGesture];
 }
 
+- (BOOL) enoughDistanceFromLast:(Touch*)data numTouches:(int)n {
+    if (lastPoints == nil) {
+        return YES;
+    } else {
+        // If any fingers are far enough, the whole gesture should be considered far enough.
+        return NO;
+    }
+}
+
 - (void) copyLastGesturePointPosition:(Touch*)data numTouches:(int)n {
     if (lastPoints != nil) {
         free(lastPoints);
@@ -96,39 +101,22 @@ typedef enum diff_dir_t {
     NSLog(@"%ld gesture points", [gesturePoints count]);
 }
 
-- (diff_dir) directionFrom:(Touch*)t1 to:(Touch*)t2 {
+- (Direction*) directionFrom:(Touch*)t1 to:(Touch*)t2 {
     float xdiff = t2->normalized.position.x - t1->normalized.position.x;
     float ydiff = t2->normalized.position.y - t1->normalized.position.y;
     
-    diff_dir dir = NONE;
-    
-    if (xdiff < -MIN_DISTANCE)
-        dir |= LEFT;
-    else if (xdiff > MIN_DISTANCE)
-        dir |= RIGHT;
-    if (ydiff < -MIN_DISTANCE)
-        dir |= DOWN;
-    else if (ydiff > MIN_DISTANCE)
-        dir |= UP;
-    
-    return dir;
-}
-
-- (Direction*) directionFromDiffDirection:(diff_dir)dir {
-    switch (dir) {
-        case NONE:
-            return Direction.NONE;
-        case UP:
-            return Direction.UP;
-        case DOWN:
-            return Direction.DOWN;
-        case LEFT:
+    if (fabs(xdiff) > fabs(ydiff)) {
+        if (xdiff < -MIN_DISTANCE)
             return Direction.LEFT;
-        case RIGHT:
+        else if (xdiff > MIN_DISTANCE)
             return Direction.RIGHT;
+    } else {
+        if (ydiff < -MIN_DISTANCE)
+            return Direction.DOWN;
+        else if (ydiff > MIN_DISTANCE)
+            return Direction.UP;
     }
-    // Must property handle case of more than one direction.
-    return nil;
+    return Direction.NONE;
 }
 
 @end
