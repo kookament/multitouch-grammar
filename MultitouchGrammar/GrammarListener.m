@@ -27,13 +27,20 @@ typedef enum diff_dir_t {
 - (void) clear {
     lastTimestamp = 0;
     gesturePoints = [[NSMutableArray alloc] init];
+    if (lastPoints != nil) {
+        free(lastPoints);
+    }
     lastPoints = nil;
     lastPointsLength = 0;
 }
 
 - (void) handleTouches:(Touch *)data numTouches:(int)n atTime:(double)timestamp {
-    if (n < 2 || ((timestamp - lastTimestamp < MIN_INTERVAL) &&
-                  (lastPoints == nil || lastPointsLength == n))) {
+    if (n < 2) {
+        // Let go too much; gesture is reset.
+        [self clear];
+        return;
+    } else if ((timestamp - lastTimestamp < MIN_INTERVAL) &&
+               (lastPoints == nil || lastPointsLength == n)) {
         return;
     } else if (timestamp - lastTimestamp > NEW_GESTURE_START_TIME) {
         [self clear];
@@ -44,6 +51,7 @@ typedef enum diff_dir_t {
         for (int i = 0; i < n; ++i) {
             [fingers setObject:Direction.NONE forKey:[[NSNumber alloc] initWithInt:data[i].identifier]];
         }
+        [gesturePoints addObject:fingers];
     } else {
          if (n < lastPointsLength) {
             // Finger lifted.
@@ -62,6 +70,17 @@ typedef enum diff_dir_t {
             BOOL stationary = YES;
             for (int i = 0; i < n; ++i) {
                 assert(lastPoints[i].identifier == data[i].identifier);
+//                if (lastPoints[i].identifier != data[i].identifier) {
+//                    NSLog(@"caught identifiers in unequal order, skipping datapoint");
+//                    NSMutableString *expected = [[NSMutableString alloc] initWithString:@"expected: "];
+//                    NSMutableString *actual =   [[NSMutableString alloc] initWithString:@"actual:   "];
+//                    for (int j = 0; j < n; ++j) {
+//                        [expected appendFormat:@"%2d ", lastPoints[j].identifier];
+//                        [actual   appendFormat:@"%2d ", data[j].identifier];
+//                    }
+//                    NSLog(@"\n%@\n%@", expected, actual);
+//                    return;
+//                }
                 Direction *dir = [self directionFromDiffDirection:[self directionFrom:&lastPoints[i] to:&data[i]]];
                 if (dir == nil) {
                     // WAHT TO DO
@@ -80,17 +99,22 @@ typedef enum diff_dir_t {
     
     
     lastTimestamp = timestamp;
-    lastPoints = data;
+    [self copyLastGesturePointPosition:data numTouches:n];
+    NSLog(@"%@\n", [gesturePoints lastObject]);
+}
+
+- (void) copyLastGesturePointPosition:(Touch*)data numTouches:(int)n {
+    if (lastPoints != nil) {
+        free(lastPoints);
+    }
+    lastPoints = malloc(sizeof(Touch) * n);
+    memcpy(lastPoints, data, sizeof(Touch) * n);
     lastPointsLength = n;
-    
-    NSLog(@"%@\n", gesturePoints);
 }
 
 - (diff_dir) directionFrom:(Touch*)t1 to:(Touch*)t2 {
     float xdiff = t2->normalized.position.x - t1->normalized.position.x;
     float ydiff = t2->normalized.position.y - t1->normalized.position.y;
-    
-    NSLog(@"%f, %f", t1->normalized.position.x, t1->normalized.position.y);
     
     diff_dir dir = NONE;
     
