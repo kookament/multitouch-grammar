@@ -2,15 +2,20 @@
 
 // geture detection parameters
 
-// How long must elapse between consecutive measurements in order to create a new gsture point.
+// How long must elapse between consecutive measurements in order to create a new gesture point.
 // Certain events are exempted from this requirement:
 //   - there is no previous point
 //   - the number of fingers has changed
 //   - (unimplemented) the distance since the last point is above a threshold
 const double MIN_INTERVAL = 0.05;
-// How far a finger most move (in normalized space) to be considered moving (avoids twitches,
-// movements that are not exactly in one compass direction, etc.).
-const double MIN_DISTANCE = 0.1;
+// How much any finger must move to trigger registration of a new gesture point for all fingers.
+const double MIN_TRIGGER_DISTANCE = 0.2;
+// How much a given finger must move, assuming a gesture point is going to be registered, to
+// be considered moving. Note that this should be smaller than the trigger distance. In
+// combination with the trigger distance, this ensures that any fingers that were near but did
+// not pass the the trigger threshold still count as moving (while still ruling out twitches
+// or small accidental movements).
+const double MIN_MOVE_DISTANCE = 0.1;
 // How long between callbacks/movements is considered a new gesture.
 const double NEW_GESTURE_START_TIME = 1.0;
 // Maximum number of gesture points in a gesture. Continuous movements with more gesture points
@@ -20,22 +25,36 @@ const int MAX_GESTURE_LENGTH = 15;
 
 // helper functions
 
+static BOOL wentFarEnough(Touch *start, Touch *end) {
+    return fabs(end->normalized.position.x - start->normalized.position.x) > MIN_TRIGGER_DISTANCE ||
+           fabs(end->normalized.position.y - start->normalized.position.y) > MIN_TRIGGER_DISTANCE;
+}
+
 static Direction *directionBetween(Touch *start, Touch *end) {
     float xdiff = end->normalized.position.x - start->normalized.position.x;
     float ydiff = end->normalized.position.y - start->normalized.position.y;
     
     if (fabs(xdiff) > fabs(ydiff)) {
-        if (xdiff < -MIN_DISTANCE)
+        if (xdiff < -MIN_MOVE_DISTANCE)
             return Direction.LEFT;
-        else if (xdiff > MIN_DISTANCE)
+        else if (xdiff > MIN_MOVE_DISTANCE)
             return Direction.RIGHT;
     } else {
-        if (ydiff < -MIN_DISTANCE)
+        if (ydiff < -MIN_MOVE_DISTANCE)
             return Direction.DOWN;
-        else if (ydiff > MIN_DISTANCE)
+        else if (ydiff > MIN_MOVE_DISTANCE)
             return Direction.UP;
     }
     return Direction.NONE;
+}
+
+static BOOL isNullPoint(NSDictionary *gesturePoint) {
+    NSArray *dirs = [gesturePoint allValues];
+    for (int i = 0; i < [dirs count]; ++i) {
+        if ([dirs objectAtIndex:i] != Direction.NONE)
+            return NO;
+    }
+    return YES;
 }
 
 // class definitions
@@ -83,21 +102,30 @@ static Direction *directionBetween(Touch *start, Touch *end) {
             [fingers setObject:Direction.NONE forKey:[[NSNumber alloc] initWithInt:data[i].identifier]];
         }
         [gesturePoints addObject:fingers];
+        if (lastPoints == nil) {
+            NSLog(@"null gesture point because no previous points");
+        } else {
+            NSLog(@"null gesture point because num fingers changed");
+        }
     } else {
-        BOOL differentFromLast = NO, stationary = YES;
+        BOOL differentFromLast = NO, movedEnough = NO;
         for (int i = 0; i < n; ++i) {
             assert(lastPoints[i].identifier == data[i].identifier);
             NSNumber *index = [[NSNumber alloc] initWithInt:data[i].identifier];
             Direction *dir = directionBetween(&lastPoints[i], &data[i]);
+            if (wentFarEnough(&lastPoints[i], &data[i])) {
+                movedEnough = YES;
+            }
             if (dir != [[gesturePoints lastObject] objectForKey:index]) {
                 differentFromLast = YES;
             }
-            if (dir != Direction.NONE) {
-                stationary = NO;
-            }
             [fingers setObject:dir forKey:index];
         }
-        if (!stationary && differentFromLast) {
+        if (!isNullPoint(fingers) && differentFromLast && movedEnough) {
+            for (int i = 0; i < n; ++i) {
+                NSLog(@"%d = (%3f, %3f)", data[i].identifier, data[i].normalized.position.x - lastPoints[i].normalized.position.x,
+                                                              data[i].normalized.position.y - lastPoints[i].normalized.position.y);
+            }
             NSLog(@"old:\n%@", [gesturePoints lastObject]);
             NSLog(@"new:\n%@", fingers);
             [gesturePoints addObject:fingers];
