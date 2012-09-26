@@ -13,7 +13,8 @@
 @interface Touch : NSObject
 
 - (Touch*) initWithMTTouch:(mtTouch*)touch;
-- (Direction*) directionFrom:(Touch*)origin withThreshold:(float)minDist;
+- (Touch*) initWithMTTouch:(mtTouch*)touch withPrevious:(Touch*)previous;
+- (Direction*) directionFrom:(Touch*)origin withBias:(Direction*)bias;
 
 @property (readonly, nonatomic) NSNumber *identifier;
 @property (readonly, nonatomic) float x;

@@ -9,14 +9,6 @@
 //   - the number of fingers has changed
 //   - (unimplemented) the distance since the last point is above a threshold
 const double MIN_INTERVAL = 0.05;
-// How much any finger must move to trigger registration of a new gesture point for all fingers.
-const double MIN_TRIGGER_DISTANCE = 0.2;
-// How much a given finger must move, assuming a gesture point is going to be registered, to
-// be considered moving. Note that this should be smaller than the trigger distance. In
-// combination with the trigger distance, this ensures that any fingers that were near but did
-// not pass the the trigger threshold still count as moving (while still ruling out twitches
-// or small accidental movements).
-const double MIN_MOVE_DISTANCE = 0.1;
 // How long between callbacks/movements is considered a new gesture.
 const double NEW_GESTURE_START_TIME = 1.0;
 // Maximum number of gesture points in a gesture. Continuous movements with more gesture points
@@ -35,6 +27,8 @@ const int MAX_GESTURE_LENGTH = 15;
 }
 
 - (void) resetGesture {
+    if (lastTimestamp != 0)
+        [self printGesturePoints];
     lastTimestamp = 0;
     lastTouchFingerCount = 0;
     gesturePoints = [[NSMutableDictionary alloc] init];
@@ -45,6 +39,11 @@ const int MAX_GESTURE_LENGTH = 15;
 
 - (Touch*) lastCorrespondingTouch:(Touch*)touch {
     return [[gesturePoints objectForKey:touch.identifier] lastObject];
+}
+
+- (Touch*) lastTouchFor:(int)identifier {
+//    NSLog(@"%d: %@", identifier, [gesturePoints objectForKey:[[NSNumber alloc] initWithInt:identifier]]);
+    return [[gesturePoints objectForKey:[[NSNumber alloc] initWithInt:identifier]] lastObject];
 }
 
 - (void) addTouch:(Touch*)touch {
@@ -60,38 +59,18 @@ const int MAX_GESTURE_LENGTH = 15;
     } else if (timestamp - lastTimestamp < MIN_INTERVAL) {
         return;
     }
-    
-//    if (lastTimestamp == 0) {
-//        NSLog(@"initializing new gesture with touches");
-//        for (int i = 0; i < n; ++i) {
-//            [self addTouch:[[Touch alloc] initWithMTTouch:&data[i]]];
-//        }
-//        thingsGotAdded = YES;
-//    } else if (n != lastTouchFingerCount) {
-//        NSLog(@"number of fingers changed, adding entries");
-//        for (int i = 0; i < n; ++i) {
-//            Touch *t = [[Touch alloc] initWithMTTouch:&data[i]];
-//            if ([self lastCorrespondingTouch:t] == nil) {
-//                [self addTouch:t];
-//                thingsGotAdded = YES;
-//            }
-//        }
-//    } else {
-    
-        for (int i = 0; i < n; ++i) {
-            Touch *t = [[Touch alloc] initWithMTTouch:&data[i]];
-            // Dir from can't use a threshold, since it's being run so frequently. Just pick the max diff, and
-            // bias towards the direct of the previous.
-            [t setDirFromPrevious:[t directionFrom:[self lastCorrespondingTouch:t] withThreshold:MIN_MOVE_DISTANCE]];
+
+    for (int i = 0; i < n; ++i) {
+        mtTouch *rawTouch = &data[i];
+        Touch *t = [[Touch alloc] initWithMTTouch:rawTouch withPrevious:[self lastTouchFor:rawTouch->identifier]];
+        if (t.dirFromPrevious != Direction.NONE || lastTimestamp == 0 || lastTouchFingerCount != n)
             [self addTouch:t];
-        }
-//    }
+    }
 
     lastTimestamp = timestamp;
     lastTouchFingerCount = n;
     [self truncateGesturePoints];
     [self detectGesture];
-    [self printGesturePoints];
 }
 
 - (void) truncateGesturePoints {
@@ -104,7 +83,7 @@ const int MAX_GESTURE_LENGTH = 15;
 }
 
 - (void) printGesturePoints {
-    NSLog(@"%lf: gesture points", lastTimestamp);
+    NSLog(@"%.3lf: gesture points", lastTimestamp);
     for (int i = 0; i < 11; ++i) {
         NSMutableArray *finger = [gesturePoints objectForKey:[[NSNumber alloc] initWithInt:i]];
         if ([finger count] != 0) {

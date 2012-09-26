@@ -1,12 +1,9 @@
-//
-//  Touch.m
-//  MultitouchGrammar
-//
-//  Created by Sean Kelley on 9/26/12.
-//  Copyright (c) 2012 Sean Kelley. All rights reserved.
-//
-
 #import "Touch.h"
+
+// How far a finger must move (in normalized space) for directionFrom:withBias: to
+// consider the distance nonaccidental/twitchy. If the distance is less than this
+// threshold, directionFrom:withBias: returns Direction.NONE.
+const float MIN_DISTANCE = 0.05;
 
 @interface Touch () {
     mtTouch *sourceTouch;
@@ -28,24 +25,28 @@
     return self;
 }
 
-- (Direction*) directionFrom:(Touch*)origin withThreshold:(float)minDist {
+- (Touch*) initWithMTTouch:(mtTouch*)touch withPrevious:(Touch*)previous {
+    self = [self initWithMTTouch:touch];
+    self.dirFromPrevious = [self directionFrom:previous withBias:previous.dirFromPrevious];
+    return self;
+}
+
+- (Direction*) directionFrom:(Touch*)origin withBias:(Direction*)bias {
     if (origin == nil)
         return Direction.NONE;
     
     float xdiff = self.x - origin.x;
     float ydiff = self.y - origin.y;
     
-    if (fabs(xdiff) > fabs(ydiff)) {
-        if (xdiff < -minDist)
-            return Direction.LEFT;
-        else if (xdiff > minDist)
-            return Direction.RIGHT;
-    } else {
-        if (ydiff < -minDist)
-            return Direction.DOWN;
-        else if (ydiff > minDist)
-            return Direction.UP;
-    }
+    if (bias == Direction.LEFT || bias == Direction.RIGHT)
+        xdiff *= 2;
+    else if (bias == Direction.UP || bias == Direction.DOWN)
+        ydiff *= 2;
+    
+    if (fabs(xdiff) > fabs(ydiff) && fabs(xdiff) > MIN_DISTANCE)
+        return xdiff < 0 ? Direction.LEFT : Direction.RIGHT;
+    else if (fabs(ydiff) > MIN_DISTANCE)
+        return ydiff < 0 ? Direction.DOWN : Direction.UP;
     return Direction.NONE;
 }
 
@@ -62,7 +63,7 @@
 }
 
 - (NSString*) description {
-    return [NSString stringWithFormat:@"%d: <%.3f, %.3f, %@>", self.identifier, self.x, self.y, self.dirFromPrevious];
+    return [NSString stringWithFormat:@"%@: <%.3f, %.3f, %@>", self.identifier, self.x, self.y, self.dirFromPrevious];
 }
 
 @end
