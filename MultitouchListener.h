@@ -1,8 +1,8 @@
 #import <Foundation/Foundation.h>
-#import "Touch.h"
+#import "Multitouch.h"
 
 @interface MultitouchListener : NSObject
 
-- (void) handleTouches:(Touch*)data numTouches:(int)n atTime:(double)timestamp;
+- (void) handleTouches:(mtTouch*)data numTouches:(int)n atTime:(double)timestamp;
 
 @end

@@ -1,37 +1,25 @@
+//
+//  Touch.h
+//  MultitouchGrammar
+//
+//  Created by Sean Kelley on 9/26/12.
+//  Copyright (c) 2012 Sean Kelley. All rights reserved.
+//
+
 #import <Foundation/Foundation.h>
-#include <unistd.h>
-#include <CoreFoundation/CoreFoundation.h>
+#import "Multitouch.h"
+#import "Direction.h"
 
-typedef struct {
-	float x, y;
-} mtPoint;
+@interface Touch : NSObject
 
-typedef struct {
-	mtPoint position, velocity;
-} mtVector;
+- (Touch*) initWithMTTouch:(mtTouch*)touch;
+- (Direction*) directionFrom:(Touch*)origin withThreshold:(float)minDist;
 
-typedef struct {
-	int frame;           // Current event frame.
-	double timestamp;    // Touch event timestamp.
-	int identifier;      // ID of this touch in the current gesture, on [1,11].
-	int state;           // Current state; exact meaning of values unknown.
-	int unknown1;        // ?
-	int unknown2;        // ?
-	mtVector normalized; // Normalized position/velocity of touch.
-	float size;          // Area of the touch being tracked.
-	int unknown3;        // ?
-	float angle;         // Angle of the touch.
-	float majorAxis;     // Major axis of the touch ellipsoid.
-	float minorAxis;     // Minor axis of the touch ellipsoid.
-	mtVector unknown4;   // ?
-	int unknown5[2];     // ?
-	float unknown6;      // ?
-} Touch;
+@property (readonly, nonatomic) NSNumber *identifier;
+@property (readonly, nonatomic) float x;
+@property (readonly, nonatomic) float y;
 
-typedef void *MTDeviceRef;                                               // Reference pointer for multitouch device.
-typedef int (*MTContactCallbackFunction)(int, Touch*, int, double, int); // Prototype for callback function.
+// This doesn't quite belong here, but this is easier for quick testing.
+@property Direction *dirFromPrevious;
 
-MTDeviceRef MTDeviceCreateDefault();                                         // Returns a pointer to the default device (trackpad).
-CFMutableArrayRef MTDeviceCreateList(void);                                  // Returns a CFMutableArrayRef array of all multitouch devices.
-void MTRegisterContactFrameCallback(MTDeviceRef, MTContactCallbackFunction); // Registers a device's frame callback to a callback function.
-void MTDeviceStart(MTDeviceRef, int);                                        // Start sending events.
+@end

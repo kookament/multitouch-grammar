@@ -17,14 +17,14 @@ const BOOL PRINT_A_LOT = NO;
 
 @synthesize lastTimestamp;
 
-- (void) handleTouches:(Touch *)data numTouches:(int)n atTime:(double)timestamp {
+- (void) handleTouches:(mtTouch *)data numTouches:(int)n atTime:(double)timestamp {
     if (timestamp - self.lastTimestamp < MIN_PRINT_INTERVAL)
         return;
     self.lastTimestamp = timestamp;
     
     printf("%6.2lf    ", timestamp);
     for (int i = 0; i < n; i++) {
-        Touch *t = &data[i];
+        mtTouch *t = &data[i];
         if (PRINT_A_LOT) {
             printf("frame: %d, ID: %d, state: %d, PosX: %f, PosY: %f, VelX: %f, VelY: %f, Angle: %f, MajorAxis: %f, MinorAxis: %f\n",
                    t->frame,

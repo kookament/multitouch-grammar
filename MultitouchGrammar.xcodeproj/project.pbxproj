@@ -15,6 +15,8 @@
 		78088B9815FD5F070074C90A /* MultitouchSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 78088B9715FD5F070074C90A /* MultitouchSupport.framework */; };
 		78088B9B15FD61930074C90A /* GrammarListener.m in Sources */ = {isa = PBXBuildFile; fileRef = 78088B9A15FD61930074C90A /* GrammarListener.m */; };
 		78088BA915FD6E8F0074C90A /* Enum.m in Sources */ = {isa = PBXBuildFile; fileRef = 78088B9D15FD63190074C90A /* Enum.m */; };
+		789523271613A595009DAA51 /* Touch.m in Sources */ = {isa = PBXBuildFile; fileRef = 789523261613A595009DAA51 /* Touch.m */; };
+		7895232A1613A672009DAA51 /* Direction.m in Sources */ = {isa = PBXBuildFile; fileRef = 789523291613A672009DAA51 /* Direction.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,7 +29,7 @@
 		78088B7315FD569A0074C90A /* MultitouchGrammar-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MultitouchGrammar-Info.plist"; sourceTree = "<group>"; };
 		78088B7715FD569A0074C90A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		78088B7915FD569A0074C90A /* MultitouchGrammar-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MultitouchGrammar-Prefix.pch"; sourceTree = "<group>"; };
-		78088B8815FD56CC0074C90A /* Touch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Touch.h; sourceTree = "<group>"; };
+		78088B8815FD56CC0074C90A /* Multitouch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Multitouch.h; sourceTree = "<group>"; };
 		78088B9115FD5AFA0074C90A /* MultitouchListener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MultitouchListener.h; path = ../MultitouchListener.h; sourceTree = "<group>"; };
 		78088B9215FD5AFA0074C90A /* MultitouchListener.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MultitouchListener.m; path = ../MultitouchListener.m; sourceTree = "<group>"; };
 		78088B9415FD5D8C0074C90A /* PrintingListener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrintingListener.h; sourceTree = "<group>"; };
@@ -37,6 +39,10 @@
 		78088B9A15FD61930074C90A /* GrammarListener.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GrammarListener.m; sourceTree = "<group>"; };
 		78088B9C15FD63190074C90A /* Enum.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Enum.h; sourceTree = "<group>"; };
 		78088B9D15FD63190074C90A /* Enum.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Enum.m; sourceTree = "<group>"; };
+		789523251613A595009DAA51 /* Touch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Touch.h; sourceTree = "<group>"; };
+		789523261613A595009DAA51 /* Touch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Touch.m; sourceTree = "<group>"; };
+		789523281613A672009DAA51 /* Direction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Direction.h; sourceTree = "<group>"; };
+		789523291613A672009DAA51 /* Direction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Direction.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,6 +127,10 @@
 		78088B7115FD569A0074C90A /* MultitouchGrammar */ = {
 			isa = PBXGroup;
 			children = (
+				789523281613A672009DAA51 /* Direction.h */,
+				789523291613A672009DAA51 /* Direction.m */,
+				789523251613A595009DAA51 /* Touch.h */,
+				789523261613A595009DAA51 /* Touch.m */,
 				780033CD15FED6E700835721 /* Issues */,
 				780033D015FEDD5300835721 /* Listener */,
 				78088B7215FD569A0074C90A /* Supporting Files */,
@@ -133,7 +143,7 @@
 			children = (
 				78088B9C15FD63190074C90A /* Enum.h */,
 				78088B9D15FD63190074C90A /* Enum.m */,
-				78088B8815FD56CC0074C90A /* Touch.h */,
+				78088B8815FD56CC0074C90A /* Multitouch.h */,
 				78088B7315FD569A0074C90A /* MultitouchGrammar-Info.plist */,
 				78088B7715FD569A0074C90A /* main.m */,
 				78088B7915FD569A0074C90A /* MultitouchGrammar-Prefix.pch */,
@@ -208,6 +218,8 @@
 				78088B9315FD5AFA0074C90A /* MultitouchListener.m in Sources */,
 				78088B9615FD5D8C0074C90A /* PrintingListener.m in Sources */,
 				78088B9B15FD61930074C90A /* GrammarListener.m in Sources */,
+				789523271613A595009DAA51 /* Touch.m in Sources */,
+				7895232A1613A672009DAA51 /* Direction.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
