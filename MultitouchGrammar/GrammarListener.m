@@ -7,16 +7,16 @@
 // Certain events are exempted from this requirement:
 //   - there is no previous point
 //   - the number of fingers has changed
-//   - (unimplemented) the distance since the last point is above a threshold
+//   - (unimplemented) the distance since the last point is above a threshold (?)
 const double MIN_INTERVAL = 0.05;
 // How long between callbacks/movements is considered a new gesture.
 const double NEW_GESTURE_START_TIME = 1.0;
 // Maximum number of gesture points in a gesture. Continuous movements with more gesture points
 // have their earlier gesture points thrown out to keep the geture at the maximum length.
 // Circular buffer would be nice and fast for this.
-const int MAX_GESTURE_LENGTH = 15;
+const int MAX_GESTURE_LENGTH = 10;
 
-// class definitions
+// class definition
 
 @implementation GrammarListener
 
@@ -31,12 +31,13 @@ const int MAX_GESTURE_LENGTH = 15;
 }
 
 - (void) resetGesture {
-    if (lastTimestamp != 0)
+    if (lastTimestamp != 0) {
         [self printGesturePoints];
+        for (int i = 0; i < 12; ++i)
+            [[gesturePoints objectAtIndex:i] removeAllObjects];
+    }
     lastTimestamp = 0;
     lastTouchFingerCount = 0;
-    for (int i = 0; i < 12; ++i)
-        [[gesturePoints objectAtIndex:i] removeAllObjects];
 }
 
 - (Touch*) lastTouchFor:(int)identifier {
@@ -87,6 +88,13 @@ const int MAX_GESTURE_LENGTH = 15;
 }
 
 - (void) printGesturePoints {
+    for (int i = 1; i < 12; ++i) {
+        if ([[gesturePoints objectAtIndex:i] count] > 1) {
+            goto shouldPrint;
+        }
+    }
+    return;
+shouldPrint:
     NSLog(@"%.3lf: gesture points", lastTimestamp);
     for (int i = 1; i < 12; ++i) {
         NSMutableArray *finger = [gesturePoints objectAtIndex:i];

@@ -6,6 +6,13 @@
 // Direction.NONE.
 // Determined experimentally.
 const float MIN_DISTANCE = 0.05;
+// How far a finger must move (in normalized space, after X_BIAS application) for
+// directionFrom:withBias: to consider the distance nonaccidental/twitchy, if the
+// previous reference point has Direction.NONE (i.e. it's the first point). If
+// the distance is less than this threshold and the previous point has
+// Direction.NONE, directionFrom:withBias: returns Direction.NONE.
+// Determined experimentally.
+const float MIN_START_DISTANCE = 0.15;
 // When a bias direction is given to directionFrom:withBias:, how strongly it
 // should affect the outcome. 1 has no effect, >1 is more bias, and <1 is reverse
 // bias (and should not be used -- though this is not enforced).
@@ -57,9 +64,11 @@ const float X_BIAS = 1.5;
     else if (bias == Direction.UP || bias == Direction.DOWN)
         ydiff *= BIAS_FACTOR;
     
-    if (fabs(xdiff) > fabs(ydiff) && fabs(xdiff) > MIN_DISTANCE)
+    float distanceThreshold = origin.dirFromPrevious == Direction.NONE ? MIN_START_DISTANCE :
+                                                                         MIN_DISTANCE;
+    if (fabs(xdiff) > fabs(ydiff) && fabs(xdiff) > distanceThreshold)
         return xdiff < 0 ? Direction.LEFT : Direction.RIGHT;
-    else if (fabs(ydiff) > MIN_DISTANCE)
+    else if (fabs(ydiff) > distanceThreshold)
         return ydiff < 0 ? Direction.DOWN : Direction.UP;
     return Direction.NONE;
 }
