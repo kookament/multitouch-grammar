@@ -9,6 +9,6 @@
 
 // The ordering enum items are returned in is undefined.
 + (NSArray*) allEnumItems;
-+ (id) enumWithName:(NSString*) name;
++ (Enum*) enumWithName:(NSString*) name;
 
 @end

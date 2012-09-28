@@ -28,8 +28,8 @@ typedef struct {
 	float unknown6;      // ?
 } mtTouch;
 
-typedef void *MTDeviceRef;                                               // Reference pointer for multitouch device.
-typedef int (*MTContactCallbackFunction)(int, mtTouch*, int, double, int); // Prototype for callback function.
+typedef void *MTDeviceRef;                                                   // Reference pointer for multitouch device.
+typedef int (*MTContactCallbackFunction)(int, mtTouch*, int, double, int);   // Prototype for callback function.
 
 MTDeviceRef MTDeviceCreateDefault();                                         // Returns a pointer to the default device (trackpad).
 CFMutableArrayRef MTDeviceCreateList(void);                                  // Returns a CFMutableArrayRef array of all multitouch devices.

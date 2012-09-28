@@ -100,7 +100,6 @@ static Enum *illegalEnumFunction(id self, SEL _cmd) {
     }
     
     [enumItems setObject:allEnumItemsForClass forKey:NSStringFromClass(self)];
-    
     [pool release];
 }
 

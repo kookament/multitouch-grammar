@@ -1,3 +1,0 @@
-Should the first movement after the initial NONE have a higher threshold for movement?
-    -- Means gestures all ahve to have a certain distance before the start.
-    -- Makes gestures that have stationary fingers are easier to capture correctly.
