@@ -3,7 +3,7 @@
 @interface GrammarListener : MultitouchListener {
     double lastTimestamp;
     int lastTouchFingerCount;
-    NSMutableDictionary *gesturePoints;
+    NSMutableArray *gesturePoints;
 };
 
 @end

@@ -21,8 +21,12 @@ const int MAX_GESTURE_LENGTH = 15;
 @implementation GrammarListener
 
 - (GrammarListener*) init {
-    self = [super init];
-    [self resetGesture];
+    if (self = [super init]) {
+        gesturePoints = [[NSMutableArray alloc] init];
+        for (int i = 0; i < 12; ++i) // 11 -> largest identifier returned by the driver.
+            [gesturePoints addObject:[[NSMutableArray alloc] init]];
+        [self resetGesture];
+    }
     return self;
 }
 
@@ -31,23 +35,16 @@ const int MAX_GESTURE_LENGTH = 15;
         [self printGesturePoints];
     lastTimestamp = 0;
     lastTouchFingerCount = 0;
-    gesturePoints = [[NSMutableDictionary alloc] init];
-    for (int i = 1; i < 12; ++i) { // 11 -> largest identifier returned by the driver.
-        [gesturePoints setObject:[[NSMutableArray alloc] init] forKey:[[NSNumber alloc] initWithInt:i]];
-    }
-}
-
-- (Touch*) lastCorrespondingTouch:(Touch*)touch {
-    return [[gesturePoints objectForKey:touch.identifier] lastObject];
+    for (int i = 0; i < 12; ++i)
+        [[gesturePoints objectAtIndex:i] removeAllObjects];
 }
 
 - (Touch*) lastTouchFor:(int)identifier {
-//    NSLog(@"%d: %@", identifier, [gesturePoints objectForKey:[[NSNumber alloc] initWithInt:identifier]]);
-    return [[gesturePoints objectForKey:[[NSNumber alloc] initWithInt:identifier]] lastObject];
+    return [[gesturePoints objectAtIndex:identifier] lastObject];
 }
 
 - (void) addTouch:(Touch*)touch {
-    [[gesturePoints objectForKey:touch.identifier] addObject:touch];
+    [[gesturePoints objectAtIndex:touch.identifier] addObject:touch];
 }
 
 - (void) handleTouches:(mtTouch *)data numTouches:(int)n atTime:(double)timestamp {
@@ -78,7 +75,7 @@ const int MAX_GESTURE_LENGTH = 15;
 
 - (void) truncateGesturePoints {
     for (int i = 1; i < 12; ++i) {
-        NSMutableArray *finger = [gesturePoints objectForKey:[[NSNumber alloc] initWithInt:i]];
+        NSMutableArray *finger = [gesturePoints objectAtIndex:i];
         if ([finger count] > MAX_GESTURE_LENGTH) {
             [finger removeObjectAtIndex:0];
         }
@@ -88,7 +85,7 @@ const int MAX_GESTURE_LENGTH = 15;
 - (void) printGesturePoints {
     NSLog(@"%.3lf: gesture points", lastTimestamp);
     for (int i = 1; i < 12; ++i) {
-        NSMutableArray *finger = [gesturePoints objectForKey:[[NSNumber alloc] initWithInt:i]];
+        NSMutableArray *finger = [gesturePoints objectAtIndex:i];
         if ([finger count] != 0) {
             NSLog(@"%@", finger);
         }

@@ -16,7 +16,7 @@
 - (Touch*) initWithMTTouch:(mtTouch*)touch withPrevious:(Touch*)previous;
 - (Direction*) directionFrom:(Touch*)origin withBias:(Direction*)bias;
 
-@property (readonly, nonatomic) NSNumber *identifier;
+@property (readonly, nonatomic) int identifier;
 @property (readonly, nonatomic) float x;
 @property (readonly, nonatomic) float y;
 

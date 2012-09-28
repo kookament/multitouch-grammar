@@ -64,8 +64,8 @@ const float X_BIAS = 1.5;
     return Direction.NONE;
 }
 
-- (NSNumber*) identifier {
-    return [[NSNumber alloc] initWithInt:sourceTouch->identifier];
+- (int) identifier {
+    return sourceTouch->identifier;
 }
 
 - (float) x {
@@ -77,7 +77,7 @@ const float X_BIAS = 1.5;
 }
 
 - (NSString*) description {
-    return [NSString stringWithFormat:@"%@: <%.3f, %.3f, %@>", self.identifier, self.x, self.y, self.dirFromPrevious];
+    return [NSString stringWithFormat:@"%d <%.3f, %.3f, %@>", self.identifier, self.x, self.y, self.dirFromPrevious];
 }
 
 @end
