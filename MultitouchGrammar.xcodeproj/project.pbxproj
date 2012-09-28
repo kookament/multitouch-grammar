@@ -17,6 +17,7 @@
 		789523271613A595009DAA51 /* Touch.m in Sources */ = {isa = PBXBuildFile; fileRef = 789523261613A595009DAA51 /* Touch.m */; };
 		7895232A1613A672009DAA51 /* Direction.m in Sources */ = {isa = PBXBuildFile; fileRef = 789523291613A672009DAA51 /* Direction.m */; };
 		78952339161578D9009DAA51 /* Misc in Resources */ = {isa = PBXBuildFile; fileRef = 78952338161578D9009DAA51 /* Misc */; };
+		7895234716160DCD009DAA51 /* Gesture.m in Sources */ = {isa = PBXBuildFile; fileRef = 7895234616160DCD009DAA51 /* Gesture.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,6 +44,8 @@
 		789523281613A672009DAA51 /* Direction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Direction.h; sourceTree = "<group>"; };
 		789523291613A672009DAA51 /* Direction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Direction.m; sourceTree = "<group>"; };
 		78952338161578D9009DAA51 /* Misc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Misc; sourceTree = "<group>"; };
+		7895234516160DCD009DAA51 /* Gesture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Gesture.h; sourceTree = "<group>"; };
+		7895234616160DCD009DAA51 /* Gesture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Gesture.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +86,8 @@
 			children = (
 				78088B9915FD61930074C90A /* GrammarListener.h */,
 				78088B9A15FD61930074C90A /* GrammarListener.m */,
+				7895234516160DCD009DAA51 /* Gesture.h */,
+				7895234616160DCD009DAA51 /* Gesture.m */,
 			);
 			name = Grammar;
 			sourceTree = "<group>";
@@ -220,6 +225,7 @@
 				78088B9B15FD61930074C90A /* GrammarListener.m in Sources */,
 				789523271613A595009DAA51 /* Touch.m in Sources */,
 				7895232A1613A672009DAA51 /* Direction.m in Sources */,
+				7895234716160DCD009DAA51 /* Gesture.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

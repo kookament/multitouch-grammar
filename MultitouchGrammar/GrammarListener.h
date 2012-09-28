@@ -1,9 +1,10 @@
 #import "MultitouchListener.h"
+#import "Gesture.h"
 
 @interface GrammarListener : MultitouchListener {
     double lastTimestamp;
     int lastTouchFingerCount;
-    NSMutableArray *gesturePoints;
+    Gesture *gesture;
 };
 
 @end
