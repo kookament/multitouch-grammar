@@ -16,6 +16,7 @@
 		78088BA915FD6E8F0074C90A /* Enum.m in Sources */ = {isa = PBXBuildFile; fileRef = 78088B9D15FD63190074C90A /* Enum.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		789523271613A595009DAA51 /* Touch.m in Sources */ = {isa = PBXBuildFile; fileRef = 789523261613A595009DAA51 /* Touch.m */; };
 		7895232A1613A672009DAA51 /* Direction.m in Sources */ = {isa = PBXBuildFile; fileRef = 789523291613A672009DAA51 /* Direction.m */; };
+		78952339161578D9009DAA51 /* Misc in Resources */ = {isa = PBXBuildFile; fileRef = 78952338161578D9009DAA51 /* Misc */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,6 +42,7 @@
 		789523261613A595009DAA51 /* Touch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Touch.m; sourceTree = "<group>"; };
 		789523281613A672009DAA51 /* Direction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Direction.h; sourceTree = "<group>"; };
 		789523291613A672009DAA51 /* Direction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Direction.m; sourceTree = "<group>"; };
+		78952338161578D9009DAA51 /* Misc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Misc; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -125,6 +127,7 @@
 		78088B7115FD569A0074C90A /* MultitouchGrammar */ = {
 			isa = PBXGroup;
 			children = (
+				78952338161578D9009DAA51 /* Misc */,
 				789523281613A672009DAA51 /* Direction.h */,
 				789523291613A672009DAA51 /* Direction.m */,
 				789523251613A595009DAA51 /* Touch.h */,
@@ -199,6 +202,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				78952339161578D9009DAA51 /* Misc in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

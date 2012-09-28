@@ -44,7 +44,11 @@ const int MAX_GESTURE_LENGTH = 15;
 }
 
 - (void) addTouch:(Touch*)touch {
-    [[gesturePoints objectAtIndex:touch.identifier] addObject:touch];
+    NSMutableArray *finger = [gesturePoints objectAtIndex:touch.identifier];
+    if ([[finger lastObject] dirFromPrevious] == touch.dirFromPrevious){
+        [finger removeLastObject];
+    }
+    [finger addObject:touch];
 }
 
 - (void) handleTouches:(mtTouch *)data numTouches:(int)n atTime:(double)timestamp {
