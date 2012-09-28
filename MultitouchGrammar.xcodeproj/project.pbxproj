@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		780033CE15FED6E700835721 /* Issues in Resources */ = {isa = PBXBuildFile; fileRef = 780033CD15FED6E700835721 /* Issues */; };
 		78088B6C15FD569A0074C90A /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 78088B6B15FD569A0074C90A /* Cocoa.framework */; };
 		78088B7815FD569A0074C90A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 78088B7715FD569A0074C90A /* main.m */; };
 		78088B9315FD5AFA0074C90A /* MultitouchListener.m in Sources */ = {isa = PBXBuildFile; fileRef = 78088B9215FD5AFA0074C90A /* MultitouchListener.m */; };
@@ -20,7 +19,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		780033CD15FED6E700835721 /* Issues */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Issues; sourceTree = SOURCE_ROOT; };
 		78088B6715FD569A0074C90A /* MultitouchGrammar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MultitouchGrammar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		78088B6B15FD569A0074C90A /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		78088B6E15FD569A0074C90A /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -131,7 +129,6 @@
 				789523291613A672009DAA51 /* Direction.m */,
 				789523251613A595009DAA51 /* Touch.h */,
 				789523261613A595009DAA51 /* Touch.m */,
-				780033CD15FED6E700835721 /* Issues */,
 				780033D015FEDD5300835721 /* Listener */,
 				78088B7215FD569A0074C90A /* Supporting Files */,
 			);
@@ -202,7 +199,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				780033CE15FED6E700835721 /* Issues in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

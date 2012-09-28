@@ -32,7 +32,7 @@ const int MAX_GESTURE_LENGTH = 15;
     lastTimestamp = 0;
     lastTouchFingerCount = 0;
     gesturePoints = [[NSMutableDictionary alloc] init];
-    for (int i = 0; i < 11; ++i) { // 11 -> largest identifier returned by the driver.
+    for (int i = 1; i < 12; ++i) { // 11 -> largest identifier returned by the driver.
         [gesturePoints setObject:[[NSMutableArray alloc] init] forKey:[[NSNumber alloc] initWithInt:i]];
     }
 }
@@ -54,10 +54,13 @@ const int MAX_GESTURE_LENGTH = 15;
     if (n < 2) {
         [self resetGesture];
         return;
-    } else if (timestamp - lastTimestamp > NEW_GESTURE_START_TIME) {
-        [self resetGesture];
     } else if (timestamp - lastTimestamp < MIN_INTERVAL) {
         return;
+    } else if (n != lastTouchFingerCount) {
+        [self detectGesture];
+        [self resetGesture];
+    } else if (timestamp - lastTimestamp > NEW_GESTURE_START_TIME) {
+        [self resetGesture];
     }
 
     for (int i = 0; i < n; ++i) {
@@ -74,7 +77,7 @@ const int MAX_GESTURE_LENGTH = 15;
 }
 
 - (void) truncateGesturePoints {
-    for (int i = 0; i < 11; ++i) {
+    for (int i = 1; i < 12; ++i) {
         NSMutableArray *finger = [gesturePoints objectForKey:[[NSNumber alloc] initWithInt:i]];
         if ([finger count] > MAX_GESTURE_LENGTH) {
             [finger removeObjectAtIndex:0];
@@ -84,7 +87,7 @@ const int MAX_GESTURE_LENGTH = 15;
 
 - (void) printGesturePoints {
     NSLog(@"%.3lf: gesture points", lastTimestamp);
-    for (int i = 0; i < 11; ++i) {
+    for (int i = 1; i < 12; ++i) {
         NSMutableArray *finger = [gesturePoints objectForKey:[[NSNumber alloc] initWithInt:i]];
         if ([finger count] != 0) {
             NSLog(@"%@", finger);

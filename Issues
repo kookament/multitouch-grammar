@@ -1,3 +1,0 @@
-Errors in Enum class -- why are the instances themselves being autoreleased at all?
-objc[2057]: Object 0x103001970 of class __NSCFString autoreleased with no pool in place - just leaking - break on objc_autoreleaseNoPool() to debug
-objc[2057]: Object 0x103001880 of class Direction autoreleased with no pool in place - just leaking - break on objc_autoreleaseNoPool() to debug
