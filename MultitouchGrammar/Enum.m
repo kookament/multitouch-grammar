@@ -73,8 +73,11 @@ static Enum *illegalEnumFunction(id self, SEL _cmd) {
 + (void) initialize {
     // Enum must be subclassed.
     if (self == [Enum class]) {
+        enumItems = [[NSMutableDictionary alloc] init];
         return;
     }
+    
+    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
     
     // Metaclass: we want the static methods.
     Class metaClass = objc_getMetaClass([[self className] UTF8String]);
@@ -97,12 +100,11 @@ static Enum *illegalEnumFunction(id self, SEL _cmd) {
     }
     
     [enumItems setObject:allEnumItemsForClass forKey:NSStringFromClass(self)];
+    
+    [pool release];
 }
 
 + (Enum*) addEnumObjectWithName:(NSString*)name {
-    if (enumItems == nil) {
-        enumItems = [[NSMutableDictionary alloc] init];
-    }
     assert([enumItems objectForKey:name] == nil);
     Enum *e = [[[self class] alloc] init];
     [e _setName:name];

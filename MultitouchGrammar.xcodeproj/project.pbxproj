@@ -14,7 +14,7 @@
 		78088B9615FD5D8C0074C90A /* PrintingListener.m in Sources */ = {isa = PBXBuildFile; fileRef = 78088B9515FD5D8C0074C90A /* PrintingListener.m */; };
 		78088B9815FD5F070074C90A /* MultitouchSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 78088B9715FD5F070074C90A /* MultitouchSupport.framework */; };
 		78088B9B15FD61930074C90A /* GrammarListener.m in Sources */ = {isa = PBXBuildFile; fileRef = 78088B9A15FD61930074C90A /* GrammarListener.m */; };
-		78088BA915FD6E8F0074C90A /* Enum.m in Sources */ = {isa = PBXBuildFile; fileRef = 78088B9D15FD63190074C90A /* Enum.m */; };
+		78088BA915FD6E8F0074C90A /* Enum.m in Sources */ = {isa = PBXBuildFile; fileRef = 78088B9D15FD63190074C90A /* Enum.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		789523271613A595009DAA51 /* Touch.m in Sources */ = {isa = PBXBuildFile; fileRef = 789523261613A595009DAA51 /* Touch.m */; };
 		7895232A1613A672009DAA51 /* Direction.m in Sources */ = {isa = PBXBuildFile; fileRef = 789523291613A672009DAA51 /* Direction.m */; };
 /* End PBXBuildFile section */
