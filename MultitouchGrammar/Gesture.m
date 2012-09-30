@@ -66,11 +66,33 @@ const int MAX_GESTURE_LENGTH = 10;
 
 - (NSArray*) sorted {
     return [[fingers
-    filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(id o, NSDictionary *bindings) {
-        return [o count] > 0;
+    filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(id array, NSDictionary *bindings) {
+        return [array count] > 0;
     }]] sortedArrayUsingComparator:^NSComparisonResult(id a, id b) {
         return [[a objectAtIndex:0] compare:[b objectAtIndex:0]];
     }];
+}
+
+- (BOOL) isEqualToGesture:(Gesture *)gesture {
+    NSArray *sorted = [self sorted];
+    NSArray *otherSorted = [gesture sorted];
+    
+    if ([sorted count] != [otherSorted count])
+        return NO;
+    
+    for (int i = 0; i < [sorted count]; ++i) {
+        NSArray *f1 = [sorted objectAtIndex:i];
+        NSArray *f2 = [sorted objectAtIndex:i];
+        
+        if ([f1 count] != [f2 count])
+            return NO;
+        
+        for (int j = 0; j < [f1 count]; ++j) {
+            if ([[f1 objectAtIndex:j] dirFromPrevious] != [[f2 objectAtIndex:j] dirFromPrevious])
+                return NO;
+        }
+    }
+    return YES;
 }
 
 @end

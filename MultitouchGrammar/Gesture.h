@@ -13,5 +13,6 @@
 - (void) reset;
 
 - (NSArray*) sorted;
+- (BOOL) isEqualToGesture:(Gesture*)gesture;
 
 @end

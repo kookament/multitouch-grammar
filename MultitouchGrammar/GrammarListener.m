@@ -62,7 +62,7 @@ const double NEW_GESTURE_START_TIME = 1.0;
 }
 
 - (void) detectGesture {
-    //
+    assert([gesture isEqualToGesture:gesture]);
 }
 
 @end
