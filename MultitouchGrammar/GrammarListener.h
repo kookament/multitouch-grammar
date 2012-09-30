@@ -4,6 +4,7 @@
 @interface GrammarListener : MultitouchListener {
     double lastTimestamp;
     int lastTouchFingerCount;
+    BOOL detectedGesture;
     Gesture *gesture;
 };
 

@@ -14,23 +14,31 @@ const double NEW_GESTURE_START_TIME = 1.0;
 
 // class definition
 
+static Gesture *targetGesture = nil;
+
 @implementation GrammarListener
 
 - (GrammarListener*) init {
     if (self = [super init]) {
         gesture = [[Gesture alloc] init];
-        [self reset];
+        detectedGesture = NO;
+        lastTimestamp = 0;
+        lastTouchFingerCount = 0;
     }
     return self;
 }
 
 - (void) reset {
     if (lastTimestamp != 0) {
-        if ([gesture isValid]) {
+        if (![gesture isEmpty]) {
             NSLog(@"%@", [gesture sorted]);
+            if (targetGesture == nil && ![gesture isEmpty] ) {
+                targetGesture = gesture;
+            }
         }
-        [gesture reset];
+        gesture = [[Gesture alloc] init];
     }
+    detectedGesture = NO;
     lastTimestamp = 0;
     lastTouchFingerCount = 0;
 }
@@ -46,6 +54,8 @@ const double NEW_GESTURE_START_TIME = 1.0;
         [self reset];
     } else if (timestamp - lastTimestamp > NEW_GESTURE_START_TIME) {
         [self reset];
+    } else if (detectedGesture) {
+        return;
     }
 
     for (int i = 0; i < n; ++i) {
@@ -63,6 +73,10 @@ const double NEW_GESTURE_START_TIME = 1.0;
 
 - (void) detectGesture {
     assert([gesture isEqualToGesture:gesture]);
+    if (!detectedGesture && [gesture isEqualToGesture:targetGesture]) {
+        NSLog(@"detected original gesture.");
+        detectedGesture = YES;
+    }
 }
 
 @end

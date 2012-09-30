@@ -12,7 +12,7 @@ const float MIN_DISTANCE = 0.05;
 // the distance is less than this threshold and the previous point has
 // Direction.NONE, directionFrom:withBias: returns Direction.NONE.
 // Determined experimentally.
-const float MIN_START_DISTANCE = 0.15;
+const float MIN_START_DISTANCE = 0.25;
 // When a bias direction is given to directionFrom:withBias:, how strongly it
 // should affect the outcome. 1 has no effect, >1 is more bias, and <1 is reverse
 // bias (and should not be used -- though this is not enforced).

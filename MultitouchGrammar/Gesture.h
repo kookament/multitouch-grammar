@@ -8,9 +8,8 @@
 - (Touch*) lastTouchForFinger:(int)identifier;
 - (void) addTouch:(Touch*)touch;
 
-- (BOOL) isValid;
+- (BOOL) isEmpty;
 - (void) truncate;
-- (void) reset;
 
 - (NSArray*) sorted;
 - (BOOL) isEqualToGesture:(Gesture*)gesture;

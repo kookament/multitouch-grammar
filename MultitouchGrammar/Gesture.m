@@ -16,18 +16,13 @@ const int MAX_GESTURE_LENGTH = 10;
     return self;
 }
 
-- (void) reset {
-    for (int i = 0; i < 12; ++i)
-        [[fingers objectAtIndex:i] removeAllObjects];
-}
-
-- (BOOL) isValid {
+- (BOOL) isEmpty {
     for (int i = 1; i < 12; ++i) {
         if ([[fingers objectAtIndex:i] count] > 1) {
-            return YES;
+            return NO;
         }
     }
-    return NO;
+    return YES;
 }
 
 - (void) truncate {
@@ -40,8 +35,8 @@ const int MAX_GESTURE_LENGTH = 10;
 }
 
 - (NSString*) description {
-    if (![self isValid])
-        return @"";
+    if ([self isEmpty])
+        return @"<empty gesture>";
     NSMutableString *desc = [[NSMutableString alloc] init];
     for (int i = 1; i < 12; ++i) {
         NSMutableArray *finger = [fingers objectAtIndex:i];
@@ -82,7 +77,7 @@ const int MAX_GESTURE_LENGTH = 10;
     
     for (int i = 0; i < [sorted count]; ++i) {
         NSArray *f1 = [sorted objectAtIndex:i];
-        NSArray *f2 = [sorted objectAtIndex:i];
+        NSArray *f2 = [otherSorted objectAtIndex:i];
         
         if ([f1 count] != [f2 count])
             return NO;
