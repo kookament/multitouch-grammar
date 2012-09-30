@@ -89,4 +89,10 @@ const float X_BIAS = 1.5;
     return [NSString stringWithFormat:@"%d <%.3f, %.3f, %@>", self.identifier, self.x, self.y, self.dirFromPrevious];
 }
 
+- (NSComparisonResult) compare:(id)other {
+    // Simplified and optimized point-line distance to the line at 135 degrees through the origin.
+    float a_dist = [self x] + [self y], b_dist = [other x] + [other y];
+    return a_dist == b_dist ? NSOrderedSame : (a_dist < b_dist ? NSOrderedAscending : NSOrderedDescending);
+}
+
 @end

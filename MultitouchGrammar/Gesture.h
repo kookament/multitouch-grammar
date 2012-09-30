@@ -12,4 +12,6 @@
 - (void) truncate;
 - (void) reset;
 
+- (NSArray*) sorted;
+
 @end

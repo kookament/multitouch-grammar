@@ -26,7 +26,9 @@ const double NEW_GESTURE_START_TIME = 1.0;
 
 - (void) reset {
     if (lastTimestamp != 0) {
-        NSLog(@"%@", gesture);
+        if ([gesture isValid]) {
+            NSLog(@"%@", [gesture sorted]);
+        }
         [gesture reset];
     }
     lastTimestamp = 0;
@@ -60,7 +62,7 @@ const double NEW_GESTURE_START_TIME = 1.0;
 }
 
 - (void) detectGesture {
-    // 
+    //
 }
 
 @end
